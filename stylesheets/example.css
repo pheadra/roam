@@ -6,7 +6,7 @@
     display: none; }
 
 .l-demo-container {
-    width: 500px;
+    width: 480px;
     // margin: 40px auto 0px auto;
 }
 
@@ -87,7 +87,7 @@
     list-style: none;
     margin: 0px;
     padding: 20px;
-    height: 70%;
+    height: 300px;
     overflow: auto; }
 .example-chat ul li {
     margin-bottom: 10px;
