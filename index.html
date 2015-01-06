@@ -12,7 +12,7 @@
 
     <div class='example-chat-toolbar'>
         <label for="nameInput">Username:</label>
-        <input type='text' id='nameInput' placeholder='enter a username...'>
+        <input type='text' id='nameInput' placeholder='enter a username...' value="어흥이">
     </div>
 
     <ul id='example-messages' class="example-chat-messages"></ul>
@@ -30,6 +30,7 @@
     // REGISTER DOM ELEMENTS
     var messageField = $('#messageInput');
     var nameField = $('#nameInput');
+
     var messageList = $('#example-messages');
 
     // LISTEN FOR KEYPRESS EVENT
@@ -49,7 +50,7 @@
     messagesRef.limitToLast(20).on('child_added', function (snapshot) {
         //GET DATA
         var data = snapshot.val();
-        var username = data.name || "anonymous";
+        var username = data.name || "어흥이";
         var message = data.text;
 
         //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
