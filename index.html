@@ -30,6 +30,7 @@
 <!-- CHAT JAVACRIPT -->
 <script>
     // CREATE A REFERENCE TO FIREBASE
+    var unreadcount = 0;
     var messagesRef = new Firebase('https://haru.firebaseio.com');
 
     // REGISTER DOM ELEMENTS
@@ -38,12 +39,19 @@
 
     var messageList = $('#example-messages');
 
+    var url = window.location.search;
+   console.log(url);
+
+
     // LISTEN FOR KEYPRESS EVENT
     messageField.keypress(function (e) {
         if (e.keyCode == 13) {
             //FIELD VALUES
             var username = nameField.val();
             var message = messageField.val();
+
+            unreadcount = 0;
+            document.title = '어흥이와의 채팅 ('+ unreadcount + ')';
 
             //SAVE DATA TO FIREBASE AND EMPTY FIELD
             messagesRef.push({name:username, text:message, date:moment().format('YYYY-MM-DD hh:mm:ss')});
@@ -58,7 +66,8 @@
         var username = data.name || "어흥이";
         var message = data.text;
 
-
+        unreadcount++;
+        document.title = '어흥이와의 채팅 ('+ unreadcount + ')';
 
         //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
         var messageElement = $("<li>");
@@ -68,14 +77,14 @@
 
         if(data.date != undefined) {
             var time = moment(data.date, "YYYY-MM-DD HH:mm:ss"); //data.date;
-            console.log(time);
+            //console.log(time);
             messageElement.text(message + ' (' + time.format('MM-DD HH:mm:ss') + ')').prepend(nameElement);
         } else {
             messageElement.text(message).prepend(nameElement);
 
         }
         //ADD MESSAGE
-        messageList.append(messageElement)
+        messageList.append(messageElement);
 
         //SCROLL TO BOTTOM OF MESSAGE LIST
         messageList[0].scrollTop = messageList[0].scrollHeight;
